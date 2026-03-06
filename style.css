@@ -1,0 +1,442 @@
+/* ============================================================
+   DAILY HABITS TRACKER — style.css
+   ============================================================ */
+
+/* ── Google Font ── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ── CSS Custom Properties (Light Theme) ── */
+:root {
+  --bg: #f0f4ff;
+  --card-bg: #ffffff;
+  --card-shadow: 0 8px 32px rgba(99, 102, 241, 0.10), 0 2px 8px rgba(0,0,0,0.06);
+  --text-primary: #1e1b4b;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border: #e5e7eb;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-light: #eef2ff;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-light: #fef2f2;
+  --success: #10b981;
+  --progress-track: #e5e7eb;
+  --progress-fill-start: #6366f1;
+  --progress-fill-end: #8b5cf6;
+  --blob-1: rgba(99, 102, 241, 0.15);
+  --blob-2: rgba(139, 92, 246, 0.12);
+  --input-bg: #f9fafb;
+  --done-text: #9ca3af;
+  --checkbox-border: #d1d5db;
+  --toggle-bg: #e5e7eb;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.2s ease;
+}
+
+/* ── Dark Theme ── */
+[data-theme="dark"] {
+  --bg: #0f0f1a;
+  --card-bg: #1a1a2e;
+  --card-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
+  --text-primary: #e0e0ff;
+  --text-secondary: #a5b4fc;
+  --text-muted: #6b7280;
+  --border: #2d2d4e;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --accent-light: #1e1b4b;
+  --danger: #f87171;
+  --danger-hover: #ef4444;
+  --danger-light: #2d1515;
+  --success: #34d399;
+  --progress-track: #2d2d4e;
+  --progress-fill-start: #818cf8;
+  --progress-fill-end: #a78bfa;
+  --blob-1: rgba(99, 102, 241, 0.08);
+  --blob-2: rgba(139, 92, 246, 0.08);
+  --input-bg: #12122a;
+  --done-text: #4b5563;
+  --checkbox-border: #4b5563;
+  --toggle-bg: #2d2d4e;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Decorative Background Blobs ── */
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--blob-1);
+  top: -100px;
+  right: -100px;
+}
+.blob-2 {
+  width: 350px;
+  height: 350px;
+  background: var(--blob-2);
+  bottom: -80px;
+  left: -80px;
+}
+
+/* ── Main Container ── */
+.container {
+  max-width: 620px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Card Base ── */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--border);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ── Header Card ── */
+.card-header {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--progress-fill-end) 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: 0 8px 32px rgba(99,102,241,0.35);
+  border: none;
+}
+
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+#app-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.82);
+  margin-top: 0.25rem;
+}
+
+.today-date {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.15);
+  display: inline-block;
+  padding: 0.25rem 0.85rem;
+  border-radius: 99px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Theme Toggle Button ── */
+.theme-btn {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition), transform var(--transition);
+  backdrop-filter: blur(4px);
+}
+.theme-btn:hover {
+  background: rgba(255,255,255,0.35);
+  transform: rotate(20deg) scale(1.05);
+}
+
+/* ── Section Titles ── */
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color 0.3s;
+}
+
+/* ── Add Habit Form ── */
+.add-section { padding: 1.25rem 1.5rem; }
+
+.input-group {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.habit-input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: var(--input-bg);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+.habit-input::placeholder { color: var(--text-muted); }
+.habit-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+/* ── Buttons ── */
+.btn {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition), color var(--transition);
+  padding: 0.7rem 1.15rem;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.96); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--progress-fill-end));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+  box-shadow: 0 6px 18px rgba(99,102,241,0.45);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+}
+.btn-ghost:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Progress Section ── */
+.progress-section { padding: 1.25rem 1.5rem; }
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.progress-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 12px;
+  background: var(--progress-track);
+  border-radius: 99px;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--progress-fill-start), var(--progress-fill-end));
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 6px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 99px;
+}
+
+/* ── Habits List ── */
+.habits-section { padding: 1.25rem 1.5rem; }
+
+.habit-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* ── Habit Item ── */
+.habit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--input-bg);
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition), opacity 0.3s;
+  animation: slideIn 0.25s ease forwards;
+}
+.habit-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 10px rgba(99,102,241,0.1);
+}
+.habit-item.done {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Custom Checkbox ── */
+.habit-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--checkbox-border);
+  border-radius: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+  position: relative;
+  background: var(--card-bg);
+}
+.habit-checkbox:hover { border-color: var(--accent); transform: scale(1.1); }
+.habit-checkbox:checked {
+  background: linear-gradient(135deg, var(--accent), var(--progress-fill-end));
+  border-color: var(--accent);
+}
+.habit-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ── Habit Name ── */
+.habit-name {
+  flex: 1;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: color var(--transition), text-decoration var(--transition);
+  word-break: break-word;
+}
+.done .habit-name {
+  color: var(--done-text);
+  text-decoration: line-through;
+}
+
+/* ── Delete Button ── */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.delete-btn:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+  transform: scale(1.15);
+}
+
+/* ── Empty State ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+  text-align: center;
+  animation: none;
+}
+.empty-state .empty-icon { font-size: 2.5rem; }
+.empty-state p { font-size: 0.875rem; line-height: 1.6; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  body { padding: 1rem 0.75rem 3rem; }
+  .card, .add-section, .progress-section, .habits-section { padding: 1.1rem 1.1rem; }
+  #app-title { font-size: 1.3rem; }
+  .input-group { flex-direction: column; }
+  .btn-primary { width: 100%; justify-content: center; }
+  .habit-name { font-size: 0.85rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

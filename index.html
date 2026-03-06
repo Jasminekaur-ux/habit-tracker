@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Habits Tracker</title>
+  <meta name="description" content="Track your daily habits, build streaks, and stay consistent with the Daily Habits Tracker app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+
+  <div class="container">
+    <header class="card-header">
+      <div class="header-top">
+        <div>
+          <h1 id="app-title">🌿 Daily Habits Tracker</h1>
+          <p class="subtitle">Build better habits, one day at a time.</p>
+        </div>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+      <p id="today-date" class="today-date"></p>
+    </header>
+
+    <section class="card add-section">
+      <form id="add-habit-form" autocomplete="off">
+        <div class="input-group">
+          <input
+            type="text"
+            id="habit-input"
+            class="habit-input"
+            placeholder="e.g. Drink 8 glasses of water…"
+            maxlength="80"
+            aria-label="New habit name"
+          />
+          <button type="submit" id="add-btn" class="btn btn-primary">
+            <span>+ Add</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card progress-section">
+      <div class="progress-header">
+        <h2 class="section-title">Today's Progress</h2>
+        <button id="clear-btn" class="btn btn-ghost" title="Uncheck all habits for today">Reset Day</button>
+      </div>
+      <p id="progress-text" class="progress-text">No habits yet — add one above!</p>
+      <div class="progress-bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+    </section>
+
+    <section class="card habits-section">
+      <h2 class="section-title">My Habits</h2>
+      <ul id="habit-list" class="habit-list">
+        <li class="empty-state" id="empty-state">
+          <span class="empty-icon">📋</span>
+          <p>Your habit list is empty.<br/>Start adding habits above!</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

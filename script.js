@@ -5,7 +5,7 @@
 // ── LocalStorage Keys ──────────────────────────────────────
 const HABITS_KEY      = 'dht_habits';        // Array of { id, name }
 const COMPLETIONS_KEY = 'dht_completions';   // { "YYYY-MM-DD": { habitId: bool } }
-const THEME_KEY       = 'dht_theme';         // "light" | "dark"
+
 
 // ── DOM References ─────────────────────────────────────────
 const form           = document.getElementById('add-habit-form');
@@ -17,8 +17,7 @@ const progressFill   = document.getElementById('progress-bar-fill');
 const progressTrack  = document.querySelector('.progress-bar-track');
 const todayDateEl    = document.getElementById('today-date');
 const clearBtn       = document.getElementById('clear-btn');
-const themeToggle    = document.getElementById('theme-toggle');
-const themeIcon      = document.getElementById('theme-icon');
+
 
 // ── Helpers ────────────────────────────────────────────────
 
@@ -262,24 +261,6 @@ function clearToday() {
   renderHabits();
 }
 
-// ── Theme ──────────────────────────────────────────────────
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-  localStorage.setItem(THEME_KEY, theme);
-}
-
-function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme') || 'light';
-  applyTheme(current === 'dark' ? 'light' : 'dark');
-}
-
-function loadTheme() {
-  const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
-  applyTheme(savedTheme);
-}
-
 // ── Shake animation (inline, avoids extra CSS) ─────────────
 (function injectShakeAnimation() {
   const style = document.createElement('style');
@@ -302,16 +283,12 @@ function init() {
   // Display today's date
   todayDateEl.textContent = getFriendlyDate();
 
-  // Load saved theme preference
-  loadTheme();
-
   // Render habits (this also calls updateProgress)
   renderHabits();
 
   // Event listeners
   form.addEventListener('submit', addHabit);
   clearBtn.addEventListener('click', clearToday);
-  themeToggle.addEventListener('click', toggleTheme);
 }
 
 // Run on DOM ready

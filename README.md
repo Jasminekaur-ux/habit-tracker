@@ -21,7 +21,3 @@ Tech Stack
 - HTML – Structure and layout of the tracker.  
 - CSS – Styling, card layout, colors, progress bar, and responsive design.  
 - JavaScript (vanilla) – Habit logic, state management, and localStorage integration.
-
----
-
-
